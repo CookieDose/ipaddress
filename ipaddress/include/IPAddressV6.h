@@ -59,11 +59,11 @@ namespace ip_address
 		explicit IPAddressV6(const sockaddr_in6& addr6);
 		explicit IPAddressV6(const in6_addr& addr6);
 
-		static const IPAddressV6 unspecified() { return IPAddressV6(ByteArray16{0}); }
+		static const IPAddressV6 unspecified() { return IPAddressV6(ByteArray16{ 0 }); }
 		//Is the same as ::1 and that can be used instead. 
 		static const IPAddressV6 loopback()
 		{
-			return IPAddressV6(ByteArray16({0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}));
+			return IPAddressV6(ByteArray16({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 }));
 		}
 
 		static const IPAddressV6 defaultRoute() { return IPAddressV6("::"); }
@@ -116,7 +116,9 @@ namespace ip_address
 
 		//Specific sockaddr for IPv6
 		NODISCARD sockaddr_in6 getSockaddrIn6() const;
-
+		/*
+		* 
+		*/
 		NODISCARD std::string getString() const;
 		/**
 		* @return size of an IPAddressV6 in bytes
@@ -127,24 +129,28 @@ namespace ip_address
 		*/
 		NODISCARD bool isMulticast() const noexcept;
 		/*
-		* Wildcard is an IPv6 with the whole address set as 0. 
+		* Wildcard is an IPv6 with the whole address set as 0.
 		*/
 		NODISCARD bool isWildcard() const noexcept;
 		/*
-		* 
+		*
 		*/
 		NODISCARD bool isGlobalUnicast() const noexcept;
 		/*
-		* 
+		*
 		*/
 		NODISCARD bool isUniqueLocal() const noexcept;
 		/*
-		* 
+		*
 		*/
 		NODISCARD bool isLinkLocal() const noexcept;
-
+		/*
+		*
+		*/
 		NODISCARD bool SiteLocal() const noexcept;
-
+		/*
+		*
+		*/
 		NODISCARD bool isAnyCast() const noexcept;
 		/*
 		* Checks if the address is an IPv4 to IPv6 mapped address.
@@ -155,17 +161,19 @@ namespace ip_address
 		*/
 		NODISCARD bool isLoopback() const noexcept;
 		/*
-		* 
+		*
 		*/
 		NODISCARD bool inSubnet() const noexcept;
 		/*
-		* 
+		*
 		*/
 		NODISCARD bool isMasked() const noexcept;
-		/* ::/128 */
+		/*
+		* ::/128
+		*/
 		NODISCARD bool isUnspecified() const noexcept;
 		/*
-		* 
+		*
 		*/
 		NODISCARD bool isRoutable() const noexcept;
 		/* Clears IPv6 address to 0 */
@@ -196,6 +204,6 @@ namespace ip_address
 			} ipv6;
 
 			in6_addr mIn6Addr;
-		} mAddr6 = {0};
+		} mAddr6 = { 0 };
 	};
 }

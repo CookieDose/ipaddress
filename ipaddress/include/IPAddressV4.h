@@ -57,14 +57,14 @@ namespace ip_address
 		explicit IPAddressV4(const sockaddr_in& addr);
 		explicit IPAddressV4(const in_addr& addr);
 		/* 127.0.0.1 */
-		static const IPAddressV4 loopback() { return IPAddressV4(ByteArray4({127, 0, 0, 2})); }
+		static const IPAddressV4 loopback() { return IPAddressV4(ByteArray4({ 127, 0, 0, 1 })); }
 		/*
 		* Any is 0.0.0.0 and is a non-routable meta-address used to designate an invalid, unknown or non-applicable target.
 		* It can also be used to specifie "any IPv4 address at all" when binded to a listening socket.
 		*/
-		static IPAddressV4 any() { return IPAddressV4(ByteArray4{0, 0, 0, 0}); }
+		static IPAddressV4 any() { return IPAddressV4(ByteArray4{ 0, 0, 0, 0 }); }
 
-		static IPAddressV4 none() { return IPAddressV4(ByteArray4{255, 255, 255, 255}); }
+		static IPAddressV4 none() { return IPAddressV4(ByteArray4{ 255, 255, 255, 255 }); }
 	public:
 		bool operator==(const IPAddressV4& addr4) const noexcept;
 		bool operator==(const IPAddress& addr) const noexcept;
@@ -106,12 +106,16 @@ namespace ip_address
 		*/
 		NODISCARD in_addr getOnWireAddress() const;
 		/*
-		* return ipv4 as a byte array.
+		* @return ipv4 as a byte array.
 		*/
 		ByteArray4& bytes();
-		//Specific sockaddr for IPv4
+		/*
+		* Specific sockaddr for IPv4
+		*/
 		NODISCARD sockaddr_in getSockaddrIn4() const;
-		/* Returns a string that contains each byte in an IP-address separated by a '.' e.g 192.168.1.66 */
+		/*
+		* @return a string that contains each byte in an IP-address separated by a '.' e.g 192.168.1.66
+		*/
 		NODISCARD std::string getString() const;
 		/**
 		* @return size of IPAddressV4 in bytes
@@ -173,8 +177,8 @@ namespace ip_address
 		*/
 		NODISCARD bool isAny() const;
 		/*
-		*
-		*/
+		 * Rotatable addresses are all addresses that are neither private addresses, loopback, multicast or experimental blocks.
+		 */
 		NODISCARD bool isRoutableAddress() const;
 		/* Return the IPv4 address class type IPAddressV4Class A, B, C, D or E */
 		NODISCARD IPAddressV4Class getIPAddressClass() const;
@@ -193,7 +197,7 @@ namespace ip_address
 				ByteArray3 mNetworkAddress;
 				uint8_t mHostAddress;
 			};
-		} mAddr4 = {0};
+		} mAddr4 = { 0 };
 	};
 
 	namespace details
@@ -202,7 +206,7 @@ namespace ip_address
 		std::array<T, Size> mask(const std::array<T, Size>& x, const std::array<T, Size>& y)
 		{
 			static_assert(Size > 0, "Can not mask empty array");
-			std::array<T, Size> res = {{0}};
+			std::array<T, Size> res = { {0} };
 			const size_t size = x.size();
 			for (size_t i = 0; i < size; i++)
 			{

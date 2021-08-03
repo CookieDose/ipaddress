@@ -93,7 +93,7 @@ namespace ip_address
 		}
 
 		//hostname IPv4
-		addrinfo hints = {0};
+		addrinfo hints = { 0 };
 		hints.ai_family = AF_INET; // IPv4 addresses only
 
 		addrinfo* hostinfo = nullptr;
@@ -204,7 +204,7 @@ namespace ip_address
 		 * https://datatracker.ietf.org/doc/html/rfc3927
 		 */
 
-		/* compair the first 2 bytes then check if they are equal to 169.254 */
+		 /* compair the first 2 bytes then check if they are equal to 169.254 */
 		return (static_cast<uint16_t>(mAddr4.mBytes[0]) & 0xFFFF0000) == 0xA9FE0000;
 	}
 
@@ -225,7 +225,7 @@ namespace ip_address
 	{
 		//TODO implement
 		//mask<uint8_t, maskAddr.size()>(addr.mAddr4.mBytes, maskAddr);
-		return false; 
+		return false;
 	}
 
 	bool IPAddressV4::isMasked() const
@@ -239,9 +239,6 @@ namespace ip_address
 		return *this == any();
 	}
 
-	/*
-	 * Rotatable addresses are all addresses that are neither private addresses, loopback, multicast and experimental blocks.
-	 */
 	bool IPAddressV4::isRoutableAddress() const
 	{
 		return !isPrivate() && !isLoopback() && !isMulticast();
@@ -261,7 +258,8 @@ namespace ip_address
 		auto a = addr6.bytes();
 		a[10] = 0xFF;
 		a[11] = 0xFF;
-		memcpy(reinterpret_cast<uint32_t*>(a[12]), addr4.bytes().data(), sizeof(addr4.bytes()));
+		(uint32_t&)a[12] = (uint32_t)addr4.bytes().data();
+		//memcpy(reinterpret_cast<uint32_t*>(a[12]), addr4.bytes().data(), sizeof(addr4.bytes()));
 		return true;
 	}
 
@@ -290,7 +288,7 @@ namespace ip_address
 
 	void IPAddressV4::clear() noexcept
 	{
-		memset(&this->mAddr4, 0x0, sizeof(this->mAddr4.mBytes));
+		this->mAddr4 = { 0 };
 	}
 
 	std::ostream& operator<<(std::ostream& rhs, const IPAddressV4& lhs)

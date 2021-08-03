@@ -147,8 +147,14 @@ namespace ip_address
 		port_host_byte_order_t getPort() const;
 		/* Port in network byte order */
 		port_network_byte_order_t getPortNetworkByteOrder() const;
+		/*
+		*/
 		IPAddress getIPAddress() const;
+		/*
+		*/
 		sockaddr_in getAddressIPv4() const;
+		/*
+		*/
 		sockaddr_in6 getAddressIPv6() const;
 		//FORMAT: x.x.x.x:port
 		std::string getStringWithPort() const;

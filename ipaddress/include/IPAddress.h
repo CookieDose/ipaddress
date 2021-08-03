@@ -88,15 +88,28 @@ namespace ip_address
 		*/
 		void clear() noexcept;
 		/*
-		* Return the fanmily of the address. The return value will be return Unknown if the IPVersion was not IPv4 or IPv6. IPv4OrIPv6, kIPv4AndIPv6 and are never returned.
+		* Return the fanmily of the address. The return value will be return Unknown if the IPVersion was not IPv4 or IPv6. IPv4OrIPv6, kIPv4AndIPv6 and are never returned by this method.
 		*/
 		NODISCARD IPVersion getVersion() const noexcept;
+		/*
+		* 
+		*/
 		NODISCARD uint32_t scope() const noexcept;
-		
+		/*
+		* @return true if IPVersion is kIPv6.
+		*/
 		NODISCARD bool isIPv6() const noexcept;
+		/*
+		* @return true if IPVersion is kIPv4. 
+		*/
 		NODISCARD bool isIPv4() const noexcept; 
+		/*
+		* 
+		*/
 		IPAddressV6& asIPv6() const;
+
 		IPAddressV4& asIPv4() const;
+
 		std::string getString() const;
 	public:
 		/*

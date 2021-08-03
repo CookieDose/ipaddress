@@ -56,11 +56,13 @@ namespace ip_address
 
 	IPAddressV6& IPAddress::asIPv6() const
 	{
+		assert(this->mVersion == IPVersion::kIPv6 && "Can not represent an ipv4 as an ipv6, use IPv4ToIPv6Map() instead");
 		return mAddr.mIpAddress6;
 	}
 
 	IPAddressV4& IPAddress::asIPv4() const
 	{
+		assert(this->mVersion == IPVersion::kIPv4 && "Can not represnet an ipv6 as an ipv4, use IPv4ToIPv6Map() instead");
 		return mAddr.mIpAddress4;
 	}
 

@@ -132,7 +132,7 @@ namespace ip_address
 		if (!memcmp(addr6.bytes().data(), arr.data(), arr.size())) return false;
 		constexpr uint16_t val2 = 0xFFFF;
 		if (!memcmp(&addr6.bytes()[10], &val2, sizeof(uint16_t))) return false;
-		memcpy(&addr4.bytes(), &addr6.bytes()[12], sizeof(addr4.bytes()));
+		(uint32_t&)*addr4.bytes().data() = (uint32_t)addr6.bytes()[12];
 		return true;
 	}
 
@@ -164,7 +164,7 @@ namespace ip_address
 	sockaddr_in6 IPAddressV6::getSockaddrIn6() const
 	{
 		sockaddr_in6 addr6In = {};
-		memcpy(&addr6In.sin6_addr, &mAddr6, sizeof mAddr6);
+		memcpy(&addr6In.sin6_addr, &mAddr6, sizeof(mAddr6));
 		addr6In.sin6_family = AF_INET6;
 		return addr6In;
 	}
@@ -455,7 +455,7 @@ namespace ip_address
 
 	void IPAddressV6::clear() noexcept
 	{
-		memset(&this->mAddr6, 0x0, sizeof(mAddr6));
+		this->mAddr6 = { 0 }; 
 	}
 
 	std::ostream& operator<<(std::ostream& rhs, const IPAddressV6& lhs)
