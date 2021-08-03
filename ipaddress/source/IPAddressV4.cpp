@@ -252,13 +252,14 @@ namespace ip_address
 		|0000..............................0000|FFFF|    IPv4 address     |
 		+--------------------------------------+----+---------------------+
 						 word[5]
+		
 	*/
 	bool IPAddressV4::mapIPv4ToIPv6(IPAddressV4& addr4, IPAddressV6& addr6) noexcept
 	{
 		auto a = addr6.bytes();
 		a[10] = 0xFF;
 		a[11] = 0xFF;
-		(uint32_t&)a[12] = (uint32_t)addr4.bytes().data();
+		(uint32_t&)a[12] = (uint32_t)*addr4.bytes().data();
 		//memcpy(reinterpret_cast<uint32_t*>(a[12]), addr4.bytes().data(), sizeof(addr4.bytes()));
 		return true;
 	}

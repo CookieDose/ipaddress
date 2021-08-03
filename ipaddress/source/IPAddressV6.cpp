@@ -100,7 +100,7 @@ namespace ip_address
 		}
 
 		//hostname IPv6
-		addrinfo hints = {0};
+		addrinfo hints = { 0 };
 		hints.ai_family = AF_INET6; // IPv6 addresses only
 
 		addrinfo* hostinfo = nullptr;
@@ -128,10 +128,10 @@ namespace ip_address
 	bool IPAddressV6::mapIPv6ToIPv4(IPAddressV6& addr6, IPAddressV4& addr4) noexcept
 	{
 		//TODO might be wrong check https://datatracker.ietf.org/doc/html/rfc3513#section-2.5.5
-		constexpr std::array<uint8_t, 10> arr = {0};
+		constexpr std::array<uint8_t, 10> arr = { 0 };
 		if (!memcmp(addr6.bytes().data(), arr.data(), arr.size())) return false;
 		constexpr uint16_t val2 = 0xFFFF;
-		if (!memcmp(&addr6.bytes()[10], &val2, sizeof(uint16_t))) return false;
+		if (static_cast<uint16_t>(addr6.bytes()[10]) == val2) return false;
 		(uint32_t&)*addr4.bytes().data() = (uint32_t)addr6.bytes()[12];
 		return true;
 	}
@@ -226,7 +226,7 @@ namespace ip_address
 		/* https://datatracker.ietf.org/doc/html/rfc4291#section-2.5.2
 		 * The address 0:0:0:0:0:0:0:0 is called the unspecified address
 		 */
-		return this->mAddr6.mBytes == ByteArray16{0};
+		return this->mAddr6.mBytes == ByteArray16{ 0 };
 	}
 
 	bool IPAddressV6::isRoutable() const noexcept
@@ -367,7 +367,7 @@ namespace ip_address
 
 	bool IPAddressV6::isWildcard() const noexcept
 	{
-		return this->mAddr6.mBytes == ByteArray16{0};
+		return this->mAddr6.mBytes == ByteArray16{ 0 };
 	}
 
 	bool IPAddressV6::isGlobalUnicast() const noexcept
@@ -455,7 +455,7 @@ namespace ip_address
 
 	void IPAddressV6::clear() noexcept
 	{
-		this->mAddr6 = { 0 }; 
+		this->mAddr6 = { 0 };
 	}
 
 	std::ostream& operator<<(std::ostream& rhs, const IPAddressV6& lhs)
