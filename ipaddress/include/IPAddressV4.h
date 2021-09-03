@@ -102,6 +102,10 @@ namespace ip_address
 		*/
 		NODISCARD IPAddressV6 toIPv6() const;
 		/*
+		* @return ipv4 as long int.
+		*/
+		NODISCARD uint64_t toLong() const;
+		/*
 		* @return in_addr an IPv4 Internet address in 'on-wire' format structure.
 		*/
 		NODISCARD in_addr getOnWireAddress() const;
