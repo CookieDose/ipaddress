@@ -10,7 +10,7 @@ add_library(ipaddress STATIC
 "source/IPAddressV6.cpp"
 "source/IPEndPoint.cpp" 
 
-"include/ip.h"
+"include/NodelIP.h"
 "include/util/Config.h"
 "include/util/Endianness.h"
 "include/util/Util.h"
