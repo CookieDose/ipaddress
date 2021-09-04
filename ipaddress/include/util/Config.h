@@ -28,7 +28,14 @@
 #define NODISCARD
 #endif
 
+#define NONINLINE noinline
+//#define NONINLINE __noinline
 
+#define INLINE inline
+//#define INLINE __inline 
+
+
+#define FORCE_INLINE __forceinline
 /*
  * Return 0 or 1 depending on whether the bit is enabled
  *@param var variable
