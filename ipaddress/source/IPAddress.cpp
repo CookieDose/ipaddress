@@ -112,11 +112,16 @@ namespace ip_address
 
 	bool IPAddress::parseIPAddress(IPAddress& addr, const std::string& ip) noexcept
 	{
-		if (!IPAddressV4::parseIPAddressV4(addr.mAddr.mIpAddress4, ip))
+		if (IPAddressV4::parseIPAddressV4(addr.mAddr.mIpAddress4, ip))
 		{
-			return IPAddressV6::parseIPAddressV6(addr.mAddr.mIpAddress6, ip);
+			addr.mVersion = IPVersion::kIPv4;
+			return true;
 		}
-		return true;
+		else if (IPAddressV6::parseIPAddressV6(addr.mAddr.mIpAddress6, ip)) {
+			addr.mVersion = IPVersion::kIPv6;
+			return true;
+		}
+		return false;
 	}
 
 	void IPAddress::clear() noexcept
