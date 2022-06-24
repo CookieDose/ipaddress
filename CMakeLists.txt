@@ -6,10 +6,9 @@ cmake_minimum_required (VERSION 3.8)
 project ("ipaddress")
 
 option(IPADDRESS_BUILD_SHARED "Build shared library, when off builds static library, currently only static is supported!" OFF)
-option(IPADDRESS_BUILD_BENCHMARK "Build benchmarks" ON)
-option(IPADDRESS_BUILD_EXAMPLES "Build examples" ON)
-option(IPADDRESS_BUILD_UNIT_TEST "Build unit tests" ON)
-
+option(IPADDRESS_BUILD_BENCHMARK "Build benchmarks" OFF)
+option(IPADDRESS_BUILD_EXAMPLES "Build examples" OFF)
+option(IPADDRESS_BUILD_UNIT_TEST "Build unit tests" OFF)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

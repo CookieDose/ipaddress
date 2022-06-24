@@ -25,10 +25,10 @@ target_include_directories(ipaddress
 	PRIVATE source)
 # TODO: Add tests and install targets if needed.
 if(IPADDRESS_LIB_BENCHMARK OR IPADDRESS_LIB_EXAMPLE OR IPADDRESS_LIB_UNIT_TEST)
-
-endif()
 	enable_testing()
 	add_subdirectory(test)
+endif()
+
 set_property(TARGET ipaddress PROPERTY CXX_STANDARD 17)
 
 install(TARGETS ipaddress
